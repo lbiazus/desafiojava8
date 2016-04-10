@@ -39,7 +39,7 @@ public class AlunoTest {
 	}
 	
 	@Test
-	public void testBuscarQauntidadesDisciplinas() { 
+	public void testBuscarQuantidadesDisciplinas() { 
 		assertThat(aluno.buscarQuantidadeDisciplinasObrigatorias()).isEqualTo(3L);
 		assertThat(aluno.buscarQuantidadeDisciplinasOptativas()).isEqualTo(1L);
 	}
@@ -47,9 +47,10 @@ public class AlunoTest {
 	@Test
 	public void testBuscarDisciplinaComMaiorMedia() {
 		Disciplina disciplina = aluno.getDisciplinas().stream().reduce((d1, d2) -> d1.buscarMedia() > d2.buscarMedia() ? d1 : d2).get();
-		//Disciplina disciplina = aluno.getDisciplinas().stream().filter(d -> d.getOptativa()).reduce((d1, d2) -> d1.buscarMedia() > d2.buscarMedia() ? d1 : d2).get();
+		Disciplina disciplinaOptativa = aluno.getDisciplinas().stream().filter(d -> d.getOptativa()).reduce((d1, d2) -> d1.buscarMedia() > d2.buscarMedia() ? d1 : d2).get();
 		
 		assertThat(disciplina.getNome()).contains("Desenvolvimento Web");
+		assertThat(disciplinaOptativa.getNome()).contains("Libras");
 	}
 	
 	@Test
